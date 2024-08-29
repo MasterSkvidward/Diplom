@@ -1,0 +1,68 @@
+.container {
+   padding: 25px 28px 17px;
+   display: flex;
+   flex-direction: column;
+}
+
+.flight {
+   width: 800px;
+   display: flex;
+   column-gap: 15px;
+   font-size: 0.88em;
+   justify-content: space-between;
+   padding-right: 110px;
+
+   &__row {
+      display: flex;
+      column-gap: 6px;
+    
+      align-items: center;
+
+      p {
+         &:nth-child(1) {
+            color: #f9b234;
+            font-size: 1em;
+            font-weight: 600;
+         }
+
+         &:nth-child(2) {
+            font-size: 0.91em;
+         }
+      }
+   }
+
+   &__info {
+      display: flex;
+      flex-direction: column;
+      row-gap: 25px;
+   }
+
+   &__dates {
+      display: flex;
+      flex-direction: column;
+      row-gap: 25px;
+   }
+}
+
+.btn {
+   color: rgb(227, 227, 227);
+   font-weight: 600;
+   width: 100%;
+   max-width: 100px;
+   padding: 8px 10px;
+   border-radius: 5px;
+   cursor: pointer;
+   margin: 33px 10px 0px auto;
+  
+   &:hover {
+      opacity: 0.8;
+   }
+
+   &_save {
+      background-color: rgb(46, 158, 74);
+   }
+
+   &_cancel {
+      background-color: rgb(179, 59, 59);
+   }
+}

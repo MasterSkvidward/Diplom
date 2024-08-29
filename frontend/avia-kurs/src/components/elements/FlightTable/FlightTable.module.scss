@@ -1,0 +1,111 @@
+.flight {
+   padding: 70px 0;
+
+   &__title {
+      font-size: 1.39em;
+      font-weight: 600;
+      margin-bottom: 22px;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+   }
+
+ 
+   &__table {
+      max-width: 100%;
+      min-width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      border-radius: 13px;
+      background-color: rgb(40, 40, 40);
+      overflow: hidden;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 11px;
+   
+      th, td {
+         padding: 14px 17px;
+      }
+
+      td {
+         font-size: 0.82em;
+      }
+
+      td,th {
+         border: 0.5px solid rgb(55, 55, 55);
+      }
+   
+      thead {
+      //   background-color: #4CAF50;
+      color: #f3f3f3;
+   
+         th {
+            font-weight: 600;
+            font-size: 0.88em;
+            padding: 16px 15px;
+            color: #f4a316;
+            background-color: #323232;
+
+            &:last-of-type {
+               text-align: center;
+            }
+         }
+      }
+   
+      tbody {
+         tr {
+            td {
+         
+               min-width: 100%;
+
+               &:nth-of-type(1) {
+                  width: 20px;
+                  text-align: center;
+               }
+
+               &:last-of-type {
+                  width: 60px;
+               }
+            }
+         
+      
+            //  &:hover {
+            //    background-color: #ddd;
+            //  }
+      
+            td {
+               color: #f3f3f3;
+            }
+
+
+         }
+   }
+ }
+}
+
+.actions {
+   display: flex;
+   column-gap: 15px;
+   justify-content: center;
+
+   &__icon {
+      font-size: 1.45em;
+      cursor: pointer;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+
+      &:hover {
+         opacity: 0.86;
+      }
+   
+      &_watch {
+         color: rgb(128, 128, 255);
+      }
+   
+      &_edit {
+         color: rgb(97, 174, 105);
+      }
+   
+      &_delete {
+         font-size: 1.26em;
+         margin-top: 1px;
+         color: rgb(209, 66, 66);
+      }
+   }
+}
+
