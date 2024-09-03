@@ -37,50 +37,46 @@ app.get('/messages', async (req, res) => {
        OR (sender_id = $2 AND receiver_id = $1) ORDER BY timestamp ASC`,
       [senderId, receiverId]
     );
-    console.log('Query result:', result.rows);
     res.json(result.rows);
   } catch (error) {
     console.error('Error fetching messages:', error);
-    res.status(500).send('Error fetching messages');
+    res.status(500).json({ error: 'Error fetching messages' });
   }
 });
 
 // Отправка сообщения
 app.post('/messages', async (req, res) => {
-   const { senderId, receiverId, text } = req.body;
-   console.log(senderId,receiverId, text)
-   try {
-     const result = await pool.query(
-       `INSERT INTO messages (sender_id, receiver_id, text, timestamp) 
-        VALUES ($1, $2, $3, NOW()) RETURNING *`,
-       [senderId, receiverId, text]
-     );
-     console.log(result.rows[0])
-     res.json(result.rows[0]);
-   } catch (error) {
-     console.error('Error saving message:', error);
-     res.status(500).send('Error saving message');
-   }
- });
- 
+  const { content, senderId, receiverId } = req.body;
 
+  try {
+    console.log(`Inserting message: ${content} from senderId: ${senderId} to receiverId: ${receiverId}`);
+    const result = await pool.query(
+      `INSERT INTO messages (content, sender_id, receiver_id) VALUES ($1, $2, $3) RETURNING *`,
+      [content, senderId, receiverId]
+    );
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Error sending message:', error);
+    res.status(500).json({ error: 'Error sending message' });
+  }
+});
+
+// Логирование получения всех пользователей
+app.get('/users', async (req, res) => {
+  try {
+    console.log('Fetching all users');
+    const result = await pool.query('SELECT * FROM users');
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ error: 'Error fetching users' });
+  }
+});
+
+// Запуск сервера
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
-
-
-
-// Получение всех пользователей
-app.get('/users', async (req, res) => {
-   try {
-     const result = await pool.query('SELECT id, name, img, role, phone, email FROM users');
-     res.json(result.rows);
-   } catch (error) {
-     console.error('Error fetching users:', error);
-     res.status(500).send('Error fetching users');
-   }
- });
  
  // Получение пользователя по id
  app.get('/users/:id', async (req, res) => {
@@ -93,12 +89,8 @@ app.get('/users', async (req, res) => {
      res.status(500).send('Error fetching user');
    }
  });
- 
 
-
-
-
- // Логин пользователя
+// Логин пользователя
 app.post('/login', async (req, res) => {
    const { email, password } = req.body;
  
@@ -117,11 +109,7 @@ app.post('/login', async (req, res) => {
    }
  });
 
-
-
-
- 
- // Получение всех рейсов
+// Получение всех рейсов
 app.get('/flights', async (req, res) => {
    try {
      const result = await pool.query('SELECT * FROM flights ORDER BY id ASC');
@@ -132,9 +120,7 @@ app.get('/flights', async (req, res) => {
    }
  });
 
-
-
- // Удаление рейса по ID
+// Удаление рейса по ID
 app.delete('/flights/:id', async (req, res) => {
   const { id } = req.params;
   
@@ -210,8 +196,7 @@ app.put('/flights/:id', async (req, res) => {
   }
 });
 
-
-// Add new flight
+// Добавление нового рейса
 app.post('/flights', async (req, res) => {
   const {
     number,
@@ -229,8 +214,19 @@ app.post('/flights', async (req, res) => {
   try {
     const newFlight = await pool.query(
       `INSERT INTO flights (number, model, airline, departure_time, arrival_time, departure_town, arrival_town, departure_location, arrival_location, status)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
-      [number, model, airline, departure_time, arrival_time, departure_town, arrival_town, departure_location, arrival_location, status]
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
+      [
+        number,
+        model,
+        airline,
+        departure_time,
+        arrival_time,
+        departure_town,
+        arrival_town,
+        departure_location,
+        arrival_location,
+        status
+      ]
     );
 
     res.json(newFlight.rows[0]);
@@ -239,3 +235,5 @@ app.post('/flights', async (req, res) => {
     res.status(500).send('Error adding flight');
   }
 });
+
+

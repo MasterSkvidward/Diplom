@@ -33,8 +33,10 @@ const Chat = () => {
       const messageData = {
         senderId: currentUser.id,
         receiverId: selectedUser.id,
-        text: newMessage,
+        content: newMessage,
       };
+
+      console.log();
 
       const response = await fetch('http://localhost:3001/messages', {
         method: 'POST',
@@ -154,7 +156,7 @@ const Chat = () => {
                         : [classes.message, classes.theirMessage].join(" ")
                     }
                   >
-                    <p>{msg.text}</p>
+                    <p>{msg.content}</p>
                     <span className={classes.timestamp}>
                       {formatTimestamp(msg.timestamp)}
                     </span>
