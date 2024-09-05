@@ -70,6 +70,8 @@ const FlightTable = () => {
     }
   };
 
+  console.log(flights)
+
   return (
     <div className={classes.flight}>
       <div className="_wrapper">

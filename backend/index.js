@@ -2,6 +2,9 @@ const express = require('express');
 const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const PDFDocument = require('pdfkit'); // для создания PDF
+const fs = require('fs'); // для работы с файловой системой
+const path = require('path'); // для работы с путями файлов
 
 const app = express();
 const port = 3001;
@@ -25,6 +28,29 @@ pool.connect((err, client, release) => {
   console.log('Connected to the database');
   release();
 });
+
+// Функция для генерации отчета
+function generateReport(action, flightData) {
+  const filePath = path.join(__dirname, 'flight_changes_report.pdf');
+  const doc = new PDFDocument();
+
+  // Проверяем, существует ли уже отчет
+  if (fs.existsSync(filePath)) {
+    // Если файл существует, дополняем его
+    const existingData = fs.readFileSync(filePath);
+    const stream = fs.createWriteStream(filePath, { flags: 'a' }); // 'a' означает "append"
+    doc.pipe(stream);
+  } else {
+    // Если файл не существует, создаем новый
+    const stream = fs.createWriteStream(filePath);
+    doc.pipe(stream);
+    doc.fontSize(20).text('Отчет об изменениях в системе', { align: 'center' });
+  }
+
+  const currentDate = new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' });
+  doc.fontSize(12).text(`${currentDate} - ${action}: ${JSON.stringify(flightData, null, 2)}`);
+  doc.end();
+}
 
 // Получение сообщений между двумя пользователями
 app.get('/messages', async (req, res) => {
@@ -128,6 +154,7 @@ app.delete('/flights/:id', async (req, res) => {
     const result = await pool.query('DELETE FROM flights WHERE id = $1 RETURNING *', [id]);
 
     if (result.rowCount > 0) {
+      generateReport('Рейс удален', result.rows[0]);
       res.json(result.rows[0]);
     } else {
       res.status(404).json({ message: 'Рейс не найден' });
@@ -188,7 +215,8 @@ app.put('/flights/:id', async (req, res) => {
         id
       ]
     );
-
+    // Генерация отчета об изменении рейса
+    generateReport('Рейс изменен', updatedFlight.rows[0]);
     res.json(updatedFlight.rows[0]);
   } catch (error) {
     console.error('Error updating flight:', error);

@@ -26,6 +26,10 @@ export default function WatchFlight({flight, setVisible}) {
                <p>Статус:</p><p>{flight.status}</p>
             </div>
 
+            <div className={classes.flight__row}>
+               <p>Число пассажиров:</p><p>{flight.passenger_count}</p>
+            </div>
+
 
 
          </div>
