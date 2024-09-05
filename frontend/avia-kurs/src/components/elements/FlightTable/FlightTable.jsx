@@ -6,12 +6,19 @@ import EditFlight from '../EditFlight/EditFlight';
 import WatchFlight from '../WatchFlight/WatchFlight';
 import {formatTime} from "../../../utils/utils";
 import toast, { Toaster } from 'react-hot-toast';
+import useAuthStore from '../../../stores/auth';
 
 const FlightTable = () => {
   const [flights, setFlights] = useState([]);
   const [watchVisible, setWatchVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [currentFlight, setCurrentFlight] = useState();
+
+  const { currentUser, isAuth } = useAuthStore((state) => ({
+    currentUser: state.user,
+    isAuth: state.isAuth,
+  }));
+
 
   useEffect(() => {
     fetch('http://localhost:3001/flights')
@@ -51,6 +58,12 @@ const FlightTable = () => {
     setCurrentFlight(flight);
     setEditVisible(true);
   };
+
+  const checkRole = (role) => {
+    if (role === "admin" || role === "dispatcher") return true;
+    return false
+  };
+
 
 
   const handleDelete = async (flight) => {
@@ -102,9 +115,9 @@ const FlightTable = () => {
                 <td>{flight.arrival_town}</td>
                 <td>{flight.status}</td>
                 <td className={classes.actions}>
-                  <FaEye onClick={() => handleView(flight)} className={[classes.actions__icon, classes.actions__icon_watch].join(" ")} />
-                  <FaEdit onClick={() => handleEdit(flight)} className={[classes.actions__icon, classes.actions__icon_edit].join(" ")} />
-                  <FaTrashAlt onClick={() => handleDelete(flight)} className={[classes.actions__icon, classes.actions__icon_delete].join(" ")} />
+                  {<FaEye onClick={() => handleView(flight)} className={[classes.actions__icon, classes.actions__icon_watch].join(" ")} />}
+                  {checkRole(currentUser.role) && <FaEdit onClick={() => handleEdit(flight)} className={[classes.actions__icon, classes.actions__icon_edit].join(" ")} />}
+                  {checkRole(currentUser.role) &&<FaTrashAlt onClick={() => handleDelete(flight)} className={[classes.actions__icon, classes.actions__icon_delete].join(" ")} />}
                 </td>
               </tr>
             ))}
