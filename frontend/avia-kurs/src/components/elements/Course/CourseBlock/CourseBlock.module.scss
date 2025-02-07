@@ -1,0 +1,21 @@
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+
+    row-gap: 30px;
+    column-gap: 20px;
+}
+
+.header {
+    text-align: left;
+    padding: 20px 0;
+}
+
+.title {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #e4e3e3;
+   
+    letter-spacing: 2px;
+    margin: 0;
+}

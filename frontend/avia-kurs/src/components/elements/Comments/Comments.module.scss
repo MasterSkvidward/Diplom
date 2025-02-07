@@ -1,0 +1,185 @@
+.commentsContainer {
+    background-color: #1f1f1f;
+    padding: 15px 15px 25px;
+    border-radius: 4px;
+    margin-top: 20px;
+    color: #fff;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.totalCount {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.filterContainer {
+    margin-left: 10px;
+}
+
+.filterSelect {
+    background-color: #2a2a2a;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 0.85em;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+}
+
+/* Новая строка для поля ввода комментария - стиль в виде линии */
+.newComment {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.commentInput {
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 8px 0;
+    color: #fff;
+    font-size: 0.9em;
+    outline: none;
+    transition: border-bottom-color 0.3s;
+}
+
+.commentInput:focus {
+    border-bottom-color: #ffa500;
+}
+
+/* Кнопки появляются под полем ввода */
+.commentButtons {
+    display: flex;
+    gap: 10px;
+    margin: 10px 50px 20px 50px;
+    /* отступы под полем */
+}
+
+.cancelButton,
+.sendButton {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.cancelButton {
+    background-color: #555;
+    color: #fff;
+}
+
+.cancelButton:hover {
+    background-color: #666;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.sendButton {
+    background-color: #ffa500;
+    color: #1a1a1a;
+}
+
+.sendButton:hover {
+    background-color: #e69500;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.commentList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.commentItem {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+.commentContent {
+    flex: 1;
+}
+
+.commentHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.author {
+    font-weight: 700;
+    color: #ffa500;
+}
+
+.date {
+    color: #aaa;
+    font-size: 0.8em;
+}
+
+.text {
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.commentActions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 0.8em;
+}
+
+.likeButton,
+.dislikeButton,
+.replyButton {
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* При наведении на эмодзи появляется фон и эффект кружочка */
+.emoji {
+    display: inline-block;
+    transition: background-color 0.3s, padding 0.3s;
+    border-radius: 50%;
+}
+
+.likeButton .emoji:hover,
+.dislikeButton .emoji:hover {
+    background-color: #ddd;
+    padding: 2px;
+}
+
+.replyButton:hover {
+    text-decoration: underline;
+}
+
+.count {
+    font-weight: 600;
+}

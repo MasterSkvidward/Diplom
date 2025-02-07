@@ -1,11 +1,16 @@
 .header {
-   padding: 17px 0;
+   padding: 17px 40px;
    height: 72px;
    background-color: rgb(40, 40, 40);
    height: 82px;
    display: flex;
    align-items: center;
    box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 11px;
+   width: 100%;
+   position: fixed;
+   top: 0px; // Отступ от верха равен высоте шапки
+   left: 0px;
+   z-index: 2;
 
    &__container {
       display: flex;
@@ -24,10 +29,12 @@
       font-size: 0.95em;
       cursor: pointer;
       margin-top: 3px;
-      
+      font-weight: 600;
+      user-select: none;
+      opacity: 0.7;
 
       &:hover {
-         opacity: 0.9;
+         opacity: 0.6;
       }
    }
 
@@ -40,7 +47,7 @@
 
 .brand_name {
    font-size: 1.68em;
-   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
    cursor: pointer;
    width: fit-content;
    user-select: none;
@@ -66,7 +73,7 @@
    &__name {
       font-weight: 600;
       font-size: 0.85em;
-  
+
    }
 
    img {
@@ -104,7 +111,7 @@
          border-bottom-color: #323232;
          border-width: 9px;
          margin-right: -1px;
-       }
+      }
 
       p {
          display: flex;
@@ -128,7 +135,7 @@
 
    &__btn {
       color: rgb(240, 240, 240);
-   
+
       font-weight: 600;
       width: 100%;
       max-width: 110px;
@@ -137,10 +144,10 @@
       border-radius: 15px;
       cursor: pointer;
       box-shadow: rgba(65, 65, 65, 0.55) 0px 13px 27px -5px, rgba(9, 9, 9, 0.9) 0px 8px 16px -8px;
-   
+
       transition: color 0.2s ease-in-out;
       transition: background-color 0.2s ease-in-out;
-   
+
       &:hover {
          background-color: rgb(173, 18, 18);
       }

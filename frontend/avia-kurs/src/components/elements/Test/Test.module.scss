@@ -1,0 +1,53 @@
+.testComponent {
+    background-color: #1f1f1f; // Тёмный фон
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: 1000px;
+}
+
+.testHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h2 {
+        margin: 0;
+        color: #ffa500; // Оранжевый акцент
+    }
+}
+
+.title {
+    font-size: 1.12em;
+    font-weight: 600;
+}
+
+.timer {
+    font-size: 1.2em;
+    background: #333;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.questions {
+    display: flex;
+    flex-direction: column;
+    row-gap: 35px;
+    font-size: 0.9em;
+}
+
+.questionBlock {
+    margin-bottom: 20px;
+}
+
+.questionText {
+    margin-bottom: 10px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

@@ -5,13 +5,14 @@ import { useEffect } from "react";
 import useAuthStore from "./stores/auth";
 
 function App() {
-  const {login } = useAuthStore((state) => ({
+  const { login } = useAuthStore((state) => ({
     login: state.login,
   }));
 
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user") || "");
+    let itemUser = localStorage.getItem("user") || "";
+    const user = itemUser ? JSON.parse(itemUser) : "";
     if (user) {
       login(user.email, user.password)
     }
@@ -19,8 +20,8 @@ function App() {
 
   return (
     <div className="App">
-        <Header/>
-        <AppRouter/>
+      <Header />
+      <AppRouter />
     </div>
   );
 }
